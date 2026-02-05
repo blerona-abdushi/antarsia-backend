@@ -1,20 +1,23 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
+
+const authRoutes = require("./routes/auth.routes");
+const membersRoutes = require("./routes/members.routes");
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 app.use(cors({
-    origin: "https://antarsia.onrender.com",
-    credentials: true
-  }));
+  origin: "https://antarsia-backend.onrender.com",
+  credentials: true,
+}));
+
 app.use(express.json());
 app.use(cookieParser());
 
-// Routes
-app.use("/api/auth", require("./routes/auth.routes"));
-app.use("/api/members", require("./routes/members.routes"));
-app.use("/api/pdf", require("./routes/pdf.routes"));
+app.use("/api/auth", authRoutes);
+app.use("/api/members", membersRoutes);
 
-module.exports = app; 
+module.exports = app;

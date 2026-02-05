@@ -1,7 +1,9 @@
+require("dotenv").config();   
+
 const app = require("./app");
 const PORT = process.env.PORT || 8095;
 
-// Lidhim routes për PDF
+// routes PDF
 const pdfRoutes = require("./routes/pdf.routes"); 
 app.use("/api/pdf", pdfRoutes);
 
